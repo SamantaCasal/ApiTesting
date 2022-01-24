@@ -12,12 +12,16 @@ describe.only("POST - /v2/teal/compile", () => {
   before(async () => {
     response = await chai
       .request(process.env.BASE_URL_NODE)
-      .post('/v2/teal/compile')
-      .set('Content-Type', 'text/plain')
-      .send(fs.readFileSync(`${__dirname}/teal.txt`, 'utf8'));
+      .post("/v2/teal/compile")
+      .set("Content-Type", "text/plain")
+      .send(fs.readFileSync(`${__dirname}/teal.txt`, "utf8"));
   });
-  it("should return hash", () => {
-    expect(response.body.hash).to.be.a('string');
-    expect(response.body.result).to.be.a('string');
+  it("should return hash and result", () => {
+    expect(response.body.hash).to.be.a("string");
+    expect(response.body.result).to.be.a("string");
   });
+  it("Status code", () => {
+    expect(response.status).to.equal(200);
 });
+
+})
